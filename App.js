@@ -6,11 +6,13 @@ import AppLoading from 'expo-app-loading';
 import * as Font from 'expo-font';
 
 import productsReducer from './store/reducers/products';
+import cartReducer from './store/reducers/cart';
 
 import ShopNavigator from './navigation/ShopNavigator';
 
 const rootReducer = combineReducers({
-  products: productsReducer
+  products: productsReducer,
+  cart: cartReducer
 });
 
 const store = createStore(rootReducer);
@@ -28,6 +30,7 @@ export default function App() {
   if (!fontLoaded) {
     return <AppLoading startAsync={fetchFonts} onFinish={() => setFontLoaded(true)} onError={console.warn}/>
   }
+
   return (
     <Provider store={store}>
       <ShopNavigator />
