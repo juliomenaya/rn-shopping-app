@@ -43,7 +43,8 @@ const Cart = props => {
                         <CartItem
                             quantity={itemData.item.quantity}
                             title={itemData.item.productTitle}
-                            amount={itemData.item.sum} 
+                            amount={itemData.item.sum}
+                            deletable={true}
                             onRemove={() => {dispatch(removeFromCart(itemData.item.productId))}}
                         />
                     )

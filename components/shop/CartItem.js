@@ -16,13 +16,13 @@ const CartItem = props => {
             </View>
             <View style={styles.itemData}>
                 <Text style={styles.mainText}>${props.amount.toFixed(2)}</Text>
-                <TouchableComp onPress={props.onRemove} style={styles.deleteButton}>
+                {props.deletable && <TouchableComp onPress={props.onRemove} style={styles.deleteButton}>
                     <Ionicons 
                         name={Platform.OS === 'android' ? 'md-trash' : 'ios-trash'}
                         size={23}
                         color='red'
                     />
-                </TouchableComp>
+                </TouchableComp>}
             </View>
         </View>
     );
