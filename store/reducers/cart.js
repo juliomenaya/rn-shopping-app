@@ -1,5 +1,6 @@
 import { ADD_TO_CART, REMOVE_FROM_CART } from "../actions/cart";
 import CartItem from '../../models/cart-item';
+import { ADD_ORDER } from "../actions/orders";
 
 const initialState = {
     items: {},  // will allow us to add item.id as key and quantity as value
@@ -49,6 +50,11 @@ export default (state = initialState, action) => {
                 items: updatedCartItems,
                 totalAmount: state.totalAmount - currentCartItem.productPrice
             };
+        
+        // actions can be cases of other reducers too
+        // ADD_ORDER is handled in orders recuder
+        case ADD_ORDER:
+            return initialState;
     
         default:
             return state;
