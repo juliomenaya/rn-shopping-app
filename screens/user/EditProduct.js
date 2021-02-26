@@ -22,6 +22,7 @@ const EditProduct = props => {
         } else {
             dispatch(productsActions.createProduct(title, description, imageUrl, +price));  // +(str) cast to number: '12' => 12
         }
+        props.navigation.goBack();
     }, [dispatch, prodId, title, description, imageUrl, price]);
 
     useEffect(() => {
