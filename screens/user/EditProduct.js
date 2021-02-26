@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, TextInput, ScrollView, Platform } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { useSelector } from 'react-redux';
@@ -12,6 +12,14 @@ const EditProduct = props => {
     const [imageUrl, setImageUrl] = useState(editedProduct ? editedProduct.imageUrl : '');
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState(editedProduct ? editedProduct.description : '');
+
+    const sumbitHandler = useCallback(() => {
+        console.log('Submitting')
+    }, []);
+
+    useEffect(() => {
+        props.navigation.setParams({ submit: sumbitHandler })
+    }, [sumbitHandler])
 
 
     return (
@@ -42,6 +50,7 @@ const EditProduct = props => {
 };
 
 EditProduct.navigationOptions = navData => {
+    const submitFunc = navData.navigation.getParam('submit');
     return {
         headerTitle: navData.navigation.getParam('productId') ? 'Edit Product' : 'Add Product',
         headerRight: (
@@ -49,9 +58,7 @@ EditProduct.navigationOptions = navData => {
                 <Item
                     title='Save' 
                     iconName={Platform.OS === 'android' ? 'md-checkmark': 'ios-checkmark'} 
-                    onPress={() => {
-                        // navData.navigation.navigate('EditProducts');
-                    }}
+                    onPress={submitFunc}
                 />
             </HeaderButtons>
         )
