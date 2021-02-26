@@ -5,6 +5,16 @@ const initialState = {
     userProducts: PRODUCTS.filter(prod => prod.ownerId === 'u1')
 };
 
-export default (state = initialState, actions) => {
-    return state;
+export default (state = initialState, action) => {
+    switch (action.type) {
+        case DELETE_PRODUCT:
+            return {
+                ...state,
+                userProducts: state.userProducts.filter(prod => prod.id !== action.pid),
+                availableProducts: state.availableProducts.filter(prod => prod.id !== action.pid)
+            }
+    
+        default:
+            return state;
+    }
 };
