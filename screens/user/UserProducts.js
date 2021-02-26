@@ -55,7 +55,7 @@ UserProducts.navigationOptions = navData => {
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item
                     title='Menu' 
-                    iconName={Platform.OS === 'android' ? 'md-admin': 'ios-menu'} 
+                    iconName={Platform.OS === 'android' ? 'md-menu': 'ios-menu'} 
                     onPress={() => {
                         navData.navigation.toggleDrawer();
                     }}

@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { StyleSheet, Text, View, TextInput, ScrollView, Platform } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import { useSelector } from 'react-redux';
 import CustomHeaderButton from '../../components/UI/CustomHeaderButton';
+import { useSelector, useDispatch } from 'react-redux';
+import * as productsActions from '../../store/actions/products';
 
 const EditProduct = props => {
     const prodId = props.navigation.getParam('productId');
@@ -13,13 +14,19 @@ const EditProduct = props => {
     const [price, setPrice] = useState('');
     const [description, setDescription] = useState(editedProduct ? editedProduct.description : '');
 
-    const sumbitHandler = useCallback(() => {
-        console.log('Submitting')
-    }, []);
+    const dispatch = useDispatch();
+
+    const submitHandler = useCallback(() => {
+        if (editedProduct) {
+            dispatch(productsActions.updateProduct(prodId, title, description, imageUrl));
+        } else {
+            dispatch(productsActions.createProduct(title, description, imageUrl, +price));  // +(str) cast to number: '12' => 12
+        }
+    }, [dispatch, prodId, title, description, imageUrl, price]);
 
     useEffect(() => {
-        props.navigation.setParams({ submit: sumbitHandler })
-    }, [sumbitHandler])
+        props.navigation.setParams({ submit: submitHandler })
+    }, [submitHandler])
 
 
     return (
