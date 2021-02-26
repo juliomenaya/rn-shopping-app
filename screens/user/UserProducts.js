@@ -7,9 +7,14 @@ import CustomHeaderButton from '../../components/UI/CustomHeaderButton';
 import * as productsActions from '../../store/actions/products';
 import Colors from '../../constants/Colors';
 
-const UserProducts = () => {
+const UserProducts = props => {
     const userProducts = useSelector(state => state.products.userProducts);
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
+    const editProductHandler = (id) => {
+        props.navigation.navigate('EditProducts', { productId: id })
+    };
+
     return (
         <FlatList
             data={userProducts}
@@ -19,13 +24,15 @@ const UserProducts = () => {
                     image={itemData.item.imageUrl} 
                     title={itemData.item.title}
                     price={itemData.item.price}
-                    onSelect={() => {}}
+                    onSelect={() => {
+                        editProductHandler(itemData.item.id);
+                    }}
                 >
                     <Button 
                         color={Colors.primary} 
                         title='Edit' 
                         onPress={() => {
-                            
+                            editProductHandler(itemData.item.id);
                         }}
                     />
                     <Button
@@ -51,6 +58,17 @@ UserProducts.navigationOpntions = navData => {
                     iconName={Platform.OS === 'android' ? 'md-admin': 'ios-menu'} 
                     onPress={() => {
                         navData.navigation.toggleDrawer();
+                    }}
+                />
+            </HeaderButtons>
+        ),
+        headerRight: (
+            <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
+                <Item
+                    title='Add' 
+                    iconName={Platform.OS === 'android' ? 'md-create': 'ios-create'} 
+                    onPress={() => {
+                        navData.navigation.navigate('EditProducts');
                     }}
                 />
             </HeaderButtons>

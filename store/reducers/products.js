@@ -1,4 +1,5 @@
 import PRODUCTS from '../../data/dummy-data';
+import { DELETE_PRODUCT } from '../actions/products'
 
 const initialState = {
     availableProducts: PRODUCTS,
