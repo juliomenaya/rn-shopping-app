@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback } from 'react';
+import React, { useReducer, useCallback, useState } from 'react';
 import { StyleSheet, Text, View, ScrollView, KeyboardAvoidingView, Button } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch } from 'react-redux';
@@ -33,6 +33,7 @@ const formReducer = (state, action) => {
 };
 
 const AuthScreen = props => {
+    const [isSignUp, setIsSignUp] = useState(false);
     const dispatch = useDispatch();
 
     const [formState, dispatchFormState] = useReducer(formReducer,
@@ -49,8 +50,14 @@ const AuthScreen = props => {
         }
     );
 
-    const signupHandler = () => {
-        dispatch(authActions.signup(formState.inputValues.email, formState.inputValues.password));
+    const authHandler = () => {
+        let action;
+        if (isSignUp) {
+            action = authActions.signup(formState.inputValues.email, formState.inputValues.password);
+        } else {
+            action = authActions.login(formState.inputValues.email, formState.inputValues.password);
+        }
+        dispatch(action);
     };
 
     const inputChangeHandler = useCallback(
@@ -93,10 +100,16 @@ const AuthScreen = props => {
                             initialValue=''
                         />
                         <View style={styles.buttonContainer}>
-                            <Button title='Login' color={Colors.primary} onPress={signupHandler}/>
+                            <Button title={isSignUp ? 'Sign Up' : 'Login'} color={Colors.primary} onPress={authHandler}/>
                         </View>
                         <View style={styles.buttonContainer}>
-                            <Button title='Switch to Sign Up' color={Colors.accent} onPress={() => {}}/>
+                            <Button 
+                                title={`Switch to ${isSignUp ? 'Login' : 'Sign Up'}`} 
+                                color={Colors.accent} 
+                                onPress={() => {
+                                    setIsSignUp(prevState => !prevState)
+                                }}
+                            />
                         </View>
                     </ScrollView>
                 </Card>
