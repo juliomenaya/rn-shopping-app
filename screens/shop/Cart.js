@@ -29,7 +29,7 @@ const Cart = props => {
     const sendOrderHandler = async () => {
         setIsLoading(true);
         await dispatch(orderActions.addOrder(cartItems, cartTotalAmount));
-        isLoading(false);
+        setIsLoading(false);
     }
 
     return (

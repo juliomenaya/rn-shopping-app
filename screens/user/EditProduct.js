@@ -44,7 +44,7 @@ const EditProduct = props => {
     const [formState, dispatchFormState] = useReducer(formReducer,
         {
             inputValues: {
-                title: editedProduct ? editedProduct.imageUrl : '',
+                title: editedProduct ? editedProduct.title : '',
                 imageUrl: editedProduct ? editedProduct.imageUrl : '',
                 description: editedProduct ? editedProduct.description : '',
                 price: ''
@@ -112,7 +112,7 @@ const EditProduct = props => {
     }
 
     return (
-        <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={100} style={{flex: 1}}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={100} style={{flex: 1}}>
             <ScrollView>
                 <View style={styles.form}>
                     <Input

@@ -27,6 +27,14 @@ const Orders = props => {
         )
     }
 
+    if (orders.length === 0) {
+        return (
+            <View style={styles.centered}>
+                <Text>You do not have orders yet</Text>
+            </View>
+        );
+    }
+
     return (
         <FlatList
             data={orders}

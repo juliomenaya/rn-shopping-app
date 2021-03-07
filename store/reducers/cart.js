@@ -27,7 +27,6 @@ export default (state = initialState, action) => {
                 updatedOrNewCartItem = new CartItem(1, prodPrice, prodTitle, prodPrice);
             }
             
-            console.log('Adding product to cart')
             return {
                 items: { ...state.items, [addedProduct.id]: updatedOrNewCartItem },
                 totalAmount: state.totalAmount + prodPrice

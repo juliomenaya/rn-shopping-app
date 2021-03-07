@@ -1,5 +1,5 @@
 import React, { useReducer, useCallback, useState, useEffect } from 'react';
-import { StyleSheet, ActivityIndicator, View, ScrollView, KeyboardAvoidingView, Button, Alert } from 'react-native';
+import { StyleSheet, ActivityIndicator, View, ScrollView, KeyboardAvoidingView, Button, Alert, Platform } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useDispatch } from 'react-redux';
 import Card from '../../components/UI/Card';
@@ -69,10 +69,11 @@ const AuthScreen = props => {
         setError(null);
         try {
             await dispatch(action);
+            props.navigation.navigate('Shop');
         } catch (err) {
             setError(err.message);
+            setIsLoading(false);
         }
-        setIsLoading(false);
     };
 
     const inputChangeHandler = useCallback(
@@ -87,7 +88,7 @@ const AuthScreen = props => {
     }, [dispatchFormState]);
     
     return (
-        <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={50} style={styles.screen}>
+        <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'} keyboardVerticalOffset={50} style={styles.screen}>
             <LinearGradient colors={['#ffedff', '#ffe3ff']} style={styles.gradient}>
                 <Card style={styles.authContainer}>
                     <ScrollView>

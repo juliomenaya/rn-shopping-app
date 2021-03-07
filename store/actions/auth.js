@@ -20,7 +20,7 @@ export const signup = (email, password) => {
         const resData = await response.json();
         console.log(resData);
 
-        if (!resData.ok) {
+        if (!response.ok) {
             const errorId = resData.error.message;
             let message = 'Somethig went wrong';
             if (errorId === 'EMAIL_EXISTS') {
@@ -29,7 +29,7 @@ export const signup = (email, password) => {
             throw new Error(message);
         }
 
-        dispatch({ type: SIGNUP });
+        dispatch({ type: SIGNUP, token: resData.idToken, userId:  resData.localId  });
     };
 };
 
@@ -50,9 +50,8 @@ export const login = (email, password) => {
             }
         );
         const resData = await response.json();
-        console.log(resData);
 
-        if (!resData.ok) {
+        if (!response.ok) {
             const errorId = resData.error.message;
             let message = 'Somethig went wrong';
             if (errorId === 'EMAIL_NOT_FOUND') {
@@ -63,7 +62,6 @@ export const login = (email, password) => {
             throw new Error(message);
         }
 
-
-        dispatch({ type: LOGIN });
+        dispatch({ type: LOGIN, token: resData.idToken, userId:  resData.localId });
     };
 };
