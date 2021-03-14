@@ -67,7 +67,7 @@ const Cart = props => {
     );
 };
 
-Cart.navigationOptions = {
+export const screenOptions = {
     headerTitle: 'Your Cart'
 }
 

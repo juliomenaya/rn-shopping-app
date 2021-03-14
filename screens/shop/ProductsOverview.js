@@ -35,9 +35,9 @@ const ProductsOverview = props => {
     }, [dispatch, loadProducts]);
 
     useEffect(() => {
-        const willFocusSub = props.navigation.addListener('willFocus', loadProducts);
+        const unsubscribe = props.navigation.addListener('focus', loadProducts);
         return () => {
-            willFocusSub.remove();
+            unsubscribe();
         };
     }, [loadProducts]);
 
@@ -107,10 +107,10 @@ const ProductsOverview = props => {
     );
 };
 
-ProductsOverview.navigationOptions = navData => {
+export const screenOptions = navData => {
     return {
         headerTitle: 'All products',
-        headerLeft: (
+        headerLeft: () => (
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item
                     title='Menu' 
@@ -121,7 +121,7 @@ ProductsOverview.navigationOptions = navData => {
                 />
             </HeaderButtons>
         ),
-        headerRight: (
+        headerRight: () => (
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item
                     title='cart' 
@@ -132,8 +132,8 @@ ProductsOverview.navigationOptions = navData => {
                 />
             </HeaderButtons>
         )
-    }
-}
+    };
+};
 
 export default ProductsOverview;
 

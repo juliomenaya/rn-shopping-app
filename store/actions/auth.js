@@ -4,6 +4,13 @@ import AsyncStorage from "@react-native-community/async-storage";
 // export const LOGIN = 'LOGIN';
 export const AUTHENTICATE = 'AUTHENTICATE';
 export const LOGOUT = 'LOGOUT';
+export const SET_DID_TRY_AUTO_LOGIN = 'SET_DID_TRY_AUTO_LOGIN';
+
+export const setDidTryAutoLogin = () => {
+    return {
+        type: SET_DID_TRY_AUTO_LOGIN
+    };
+};
 
 export const authenticate = (userId, token, expiryTime) => {
     return dispatch => {

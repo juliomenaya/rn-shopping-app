@@ -65,10 +65,10 @@ const UserProducts = props => {
     );
 };
 
-UserProducts.navigationOptions = navData => {
+export const screenOptions = navData => {
     return {
         headerTitle: 'Your Products',
-        headerLeft: (
+        headerLeft: () => (
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item
                     title='Menu' 
@@ -79,7 +79,7 @@ UserProducts.navigationOptions = navData => {
                 />
             </HeaderButtons>
         ),
-        headerRight: (
+        headerRight: () => (
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item
                     title='Add' 

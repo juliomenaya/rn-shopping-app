@@ -45,9 +45,9 @@ const Orders = props => {
     );
 };
 
-Orders.navigationOptions = navData => {
+export const screenOptions = navData => {
     return {
-        headerLeft: (
+        headerLeft: () => (
             <HeaderButtons HeaderButtonComponent={CustomHeaderButton}>
                 <Item
                     title='Menu'
