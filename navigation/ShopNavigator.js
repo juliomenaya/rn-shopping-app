@@ -11,7 +11,6 @@ import { Ionicons } from '@expo/vector-icons';
 import UserProducts, { screenOptions as userProductsOptions } from '../screens/user/UserProducts';
 import EditProduct, { screenOptions as editProductOptions } from '../screens/user/EditProduct';
 import AuthScreen, { screenOptions as authOptions } from '../screens/user/AuthScreen';
-import StartUpScreen from '../screens/StartUpScreen';
 import { useDispatch } from 'react-redux';
 import * as authActions from '../store/actions/auth';
 
@@ -53,22 +52,6 @@ const ProductsNavigator = () => {
     );
 };
 
-// const ProductsNavigator = createStackNavigator({
-//     ProductsOverview: ProductsOverview,
-//     ProductDetail: ProductDetail,
-//     Cart: Cart
-// }, {
-//     navigationOptions: {
-//         drawerIcon: drawerConfig => (
-//             <Ionicons 
-//                 name={Platform.OS === 'android' ? 'md-cart': 'ios-cart'}
-//                 size={23}
-//                 color={drawerConfig.tintColor}
-//             />
-//         )
-//     },
-//     defaultNavigationOptions: defaultOptions
-// });
 
 const OrdersStackNavigator = createStackNavigator();
 
@@ -84,22 +67,6 @@ const OrdersNavigator = () => {
     );
 };
 
-// const OrdersNavigator = createStackNavigator({
-//     Orders: Orders
-// }, {
-//     navigationOptions: {
-//         drawerIcon: drawerConfig => {
-//             return (
-//                 <Ionicons 
-//                     name={Platform.OS === 'android' ? 'md-list': 'ios-list'}
-//                     size={23}
-//                     color={drawerConfig.tintColor}
-//                 />
-//             )
-//         }
-//     },
-//     defaultNavigationOptions: defaultOptions
-// });
 
 const AdminStackNavigator = createStackNavigator();
 
@@ -120,23 +87,6 @@ const AdminNavigator = () => {
     );
 };
 
-// const AdminNavigator = createStackNavigator({
-//     UserProducts: UserProducts,
-//     EditProducts: EditProduct
-// }, {
-//     navigationOptions: {
-//         drawerIcon: drawerConfig => {
-//             return (
-//                 <Ionicons 
-//                     name={Platform.OS === 'android' ? 'person-outline': 'ios-user'}
-//                     size={23}
-//                     color={drawerConfig.tintColor}
-//                 />
-//             )
-//         }
-//     },
-//     defaultNavigationOptions: defaultOptions
-// })
 
 const ShopDrawerNavigator = createDrawerNavigator();
 
@@ -203,31 +153,6 @@ export const ShopNavigator = () => {
     );
 };
 
-// const ShopNavigator = createDrawerNavigator(
-//     {
-//         Products: ProductsNavigator,
-//         Orders: OrdersNavigator,
-//         Admin: AdminNavigator
-//     }, 
-//     {
-//         contentOptions: {
-//             activeTintColor: Colors.primary
-//         },
-//         contentComponent: props => {
-//             const dispatch = useDispatch();
-//             return (
-//                 <View style={{flex: 1, paddingTop: 20}}>
-//                     <SafeAreaView forceInset={{top: 'always', horizontal: 'never'}}>
-//                         <DrawerItems {...props} />
-//                         <Button title='Logout' color={Colors.primary} onPress={() => {
-//                             dispatch(authActions.logout());
-//                         }} />
-//                     </SafeAreaView>
-//                 </View>
-//             );
-//         }
-//     }
-// );
 
 const AuthStackNavigator = createStackNavigator();
 export const AuthNavigator = () => {
@@ -237,17 +162,3 @@ export const AuthNavigator = () => {
         </AuthStackNavigator.Navigator>
     );
 };
-
-// const AuthNavigator = createStackNavigator({
-//     Auth: AuthScreen
-// }, {
-//     defaultNavigationOptions: defaultOptions
-// });
-
-// const MainNavigator = createSwitchNavigator({
-//     StartUp: StartUpScreen,
-//     Auth: AuthNavigator,
-//     Shop: ShopNavigator
-// });
-
-// export default createAppContainer(MainNavigator);
